@@ -15,6 +15,7 @@ export const MultiStepForm = (props) => {
             />
           </>
         )
+        break;
       case 'password':
         return (
           <>
@@ -27,6 +28,21 @@ export const MultiStepForm = (props) => {
           </>
         )
         break;
+      case 'select':
+        return (
+          <div className="mt-2">
+            <Form.Select aria-label={item.label}>
+              <option>{item.label}</option>
+              {
+                item.options.map((opt, index) => {
+                  return (
+                    <option value={opt}>{opt}</option>
+                  )
+                })
+              }
+            </Form.Select>
+          </div>
+        )
       default:
 
     }
@@ -35,7 +51,7 @@ export const MultiStepForm = (props) => {
   return (
     <div className="text-left">
       {
-        props.list[0].items?.map((item, index) => {
+        props.list[1].items?.map((item, index) => {
           return (
             <DisplayFormItem key={index} item={item} />
           )
