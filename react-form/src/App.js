@@ -3,6 +3,8 @@ import './App.css';
 import { MultiStepProgressBar } from "./components/MultiStepProgressBar";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState } from "react";
+import { MultiStepForm } from "./components/MultiStepForm";
+import { questions } from "./Questions";
 
 function App() {
   const [index, setIndex] = useState(1);
@@ -22,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Container className="h-100">
-        <Row className="h-100">
+        <Row className="m-5">
           <Col className="align-self-center">
             <MultiStepProgressBar
               step={index}
@@ -31,6 +33,11 @@ function App() {
         </Row>
         <Row>
           <Card>
+            <Card.Body>
+              <MultiStepForm
+                list={questions}
+                />
+            </Card.Body>
             <Card.Footer className="d-flex justify-content-between">
               <Button onClick={prevButton} disabled={index == 1}>Previous</Button>
               <Button onClick={nextButton}>Next</Button>
