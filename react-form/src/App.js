@@ -36,6 +36,7 @@ function App() {
             <Card.Body>
               <MultiStepForm
                 list={questions}
+                step={index}
                 />
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between">

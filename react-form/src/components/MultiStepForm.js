@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap";
 
 export const MultiStepForm = (props) => {
-  console.log(props);
 
   const DisplayFormItem = ({ item }) => {
     switch (item.type) {
@@ -51,7 +50,7 @@ export const MultiStepForm = (props) => {
   return (
     <div className="text-left">
       {
-        props.list[1].items?.map((item, index) => {
+        props.list[props.step - 1].items?.map((item, index) => {
           return (
             <DisplayFormItem key={index} item={item} />
           )
