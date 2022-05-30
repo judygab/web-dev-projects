@@ -3,14 +3,14 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import "./MultiStepProgressBar.css";
 
-export const MultiStepProgressBar = () => {
+export const MultiStepProgressBar = (props) => {
   return (
     <ProgressBar
-        percent={75}
+        percent={((props.step - 1) * 100) / 2}
         filledBackground="indigo"
       >
         <Step transition="scale">
-          {({ accomplished }) => (
+          {({ accomplished, index }) => (
             <div
               className={`step ${accomplished ? "completed" : null}`}
             >
@@ -19,7 +19,7 @@ export const MultiStepProgressBar = () => {
           )}
         </Step>
         <Step transition="scale">
-          {({ accomplished }) => (
+          {({ accomplished, index }) => (
             <div
               className={`step ${accomplished ? "completed" : null}`}
             >
@@ -28,7 +28,7 @@ export const MultiStepProgressBar = () => {
           )}
         </Step>
         <Step transition="scale">
-          {({ accomplished }) => (
+          {({ accomplished, index }) => (
             <div
               className={`step ${accomplished ? "completed" : null}`}
             >
