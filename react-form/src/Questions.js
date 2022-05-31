@@ -4,11 +4,13 @@ export const questions = [
     items: [
       {
         label: 'username',
-        type: 'text'
+        type: 'text',
+        value: 'username'
       },
       {
         label: 'password',
-        type: 'password'
+        type: 'password',
+        value: 'password'
       }
     ]
   },
@@ -17,15 +19,18 @@ export const questions = [
     items: [
       {
         label: 'Street Address',
-        type: 'text'
+        type: 'text',
+        value: 'street'
       },
       {
         label: 'City',
-        type: 'text'
+        type: 'text',
+        value: 'city'
       },
       {
         label: 'State',
         type: 'select',
+        value: 'state',
         options: [ 'State 1', 'State 2']
       }
     ]

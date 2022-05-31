@@ -8,7 +8,7 @@ import { questions } from "./Questions";
 
 function App() {
   const [index, setIndex] = useState(1);
-  const totalPagesCount = questions.length;
+  const totalPagesCount = questions?.length || 0;
 
   const prevButton = () => {
     if (index > 1) {
