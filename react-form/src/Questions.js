@@ -29,5 +29,14 @@ export const questions = [
         options: [ 'State 1', 'State 2']
       }
     ]
+  },
+  {
+    section: 3,
+    items: [
+      {
+        label: 'If you are ready to submit please press `Submit`',
+        type: 'information'
+      }
+    ]
   }
 ]

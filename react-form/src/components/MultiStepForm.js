@@ -27,6 +27,12 @@ export const MultiStepForm = (props) => {
           </>
         )
         break;
+      case 'information':
+        return (
+          <p>
+            {item.label}
+          </p>
+        )
       case 'select':
         return (
           <div className="mt-2">
