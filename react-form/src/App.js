@@ -2,13 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 import { MultiStepProgressBar } from "./components/MultiStepProgressBar";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MultiStepForm } from "./components/MultiStepForm";
 import { questions } from "./Questions";
 
 function App() {
   const [index, setIndex] = useState(1);
   const totalPagesCount = questions?.length || 0;
+  // numbered by pages. for exampe { 1: [{"key" : "value"}], 2:["key": "value"], 3: []}
+  const [pagesAnswers, setPagesAnswers] = useState({});
 
   const prevButton = () => {
     if (index > 1) {
@@ -20,6 +22,10 @@ function App() {
     if (index - 3) {
       setIndex(prevIndex => prevIndex + 1);
     }
+  }
+
+  const onPageAnswerUpdate = (step, answersObj) => {
+    setPagesAnswers({...pagesAnswers, [step]: answersObj});
   }
 
   return (
@@ -38,6 +44,7 @@ function App() {
               <MultiStepForm
                 list={questions}
                 step={index}
+                onPageUpdate={onPageAnswerUpdate}
                 />
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between">
