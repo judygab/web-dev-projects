@@ -8,6 +8,7 @@ import { questions } from "./Questions";
 
 function App() {
   const [index, setIndex] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
   const totalPagesCount = questions?.length || 0;
   // numbered by pages. for exampe { 1: [{"key" : "value"}], 2:["key": "value"], 3: []}
   const [pagesAnswers, setPagesAnswers] = useState({});
@@ -21,11 +22,20 @@ function App() {
   const nextButton = () => {
     if (index - 3) {
       setIndex(prevIndex => prevIndex + 1);
+    } else {
+      // clear the form on submit
+      setPagesAnswers({});
+      setSubmitted(true);
     }
   }
 
   const onPageAnswerUpdate = (step, answersObj) => {
     setPagesAnswers({...pagesAnswers, [step]: answersObj});
+  }
+
+  const handleStart = () => {
+    setIndex(1);
+    setSubmitted(false);
   }
 
   return (
@@ -39,6 +49,16 @@ function App() {
           </Col>
         </Row>
         <Row>
+          {
+            submitted ?
+            <Card>
+              <Card.Body>
+                <p>Your answers have been submitted!</p>
+              </Card.Body>
+              <Card.Footer>
+                <Button onClick={handleStart}>Start Over</Button>
+              </Card.Footer>
+            </Card> :
           <Card>
             <Card.Body>
               <MultiStepForm
@@ -53,6 +73,7 @@ function App() {
               <Button onClick={nextButton}>{index == totalPagesCount ? 'Submit' : 'Next'}</Button>
             </Card.Footer>
           </Card>
+        }
         </Row>
       </Container>
     </div>
