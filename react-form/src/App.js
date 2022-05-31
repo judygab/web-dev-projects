@@ -8,6 +8,7 @@ import { questions } from "./Questions";
 
 function App() {
   const [index, setIndex] = useState(1);
+  const totalPagesCount = questions.length;
 
   const prevButton = () => {
     if (index > 1) {
@@ -41,7 +42,7 @@ function App() {
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between">
               <Button onClick={prevButton} disabled={index == 1}>Previous</Button>
-              <Button onClick={nextButton}>Next</Button>
+              <Button onClick={nextButton}>{index == totalPagesCount ? 'Submit' : 'Next'}</Button>
             </Card.Footer>
           </Card>
         </Row>
