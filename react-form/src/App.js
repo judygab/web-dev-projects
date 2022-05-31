@@ -45,6 +45,7 @@ function App() {
                 list={questions}
                 step={index}
                 onPageUpdate={onPageAnswerUpdate}
+                pagesAnswers={pagesAnswers}
                 />
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between">

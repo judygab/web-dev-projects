@@ -1,6 +1,14 @@
 import { Form } from "react-bootstrap";
+import { useState } from "react";
 
-export const FormItem =  ({ item, onChange })  => {
+export const FormItem =  ({ item, onChange, answer })  => {
+  const [currentValue, setCurrentValue] = useState(answer || null);
+
+  const handleChange = (value) => {
+    setCurrentValue(value);
+    onChange(value, item.value);
+  }
+
    switch (item.type) {
       case 'text':
         return (
@@ -9,7 +17,8 @@ export const FormItem =  ({ item, onChange })  => {
             <Form.Control
               type="text"
               id={item.label}
-              onChange={(e) => onChange(e.target.value, item.value)}
+              onChange={(e) => handleChange(e.target.value, item.value)}
+              value={currentValue}
             />
           </>
         )
