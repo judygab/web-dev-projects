@@ -73,16 +73,16 @@ nav.navbar.scrolled {
 nav.navbar a.navbar-brand {
     width: 9%;
 }
-nav.navbar ul.navbar-nav li.nav-item a.nav-link {
-    font-weight: 400;
-    color: #fff;
-    letter-spacing: 0.8px;
-    padding: 0 25px;
-    font-size: 18px;
-    opacity: 0.75;
+nav.navbar .navbar-nav .nav-link.navbar-link {
+  font-weight: 400;
+  color: #fff !important;
+  letter-spacing: 0.8px;
+  padding: 0 25px;
+  font-size: 18px;
+  opacity: 0.75;
 }
-nav.navbar ul.navbar-nav li.nav-item a.nav-link:hover,
-nav.navbar ul.navbar-nav li.nav-item a.nav-link.active {
+nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
+nav.navbar .navbar-nav a.nav-link.navbar-link.active {
     opacity: 1;
 }
 span.navbar-text {
