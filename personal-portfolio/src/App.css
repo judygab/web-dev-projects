@@ -1,3 +1,20 @@
+/************ Custom Font ************/
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Bold.ttf');
+	font-weight: 700;
+}
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Medium.ttf');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Book.ttf');
+	font-weight: 400;
+}
+
 /************ Default Css ************/
 * {
   margin: 0;
@@ -16,6 +33,7 @@ body {
   position: relative;
   background-color: #121212;
   color: #fff !important;
+  font-family: 'Centra', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,7 +73,6 @@ input: focus, textarea:focus, select:focus {
 		padding: 0 150px;
 	}
 }
-
 
 /************ Navbar Css ************/
 nav.navbar {
@@ -229,9 +246,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   font-size: 65px;
   font-weight: 700;
   letter-spacing: 0.8px;
-  line-height: 1.2rem;
+  line-height: 1;
   margin-bottom: 20px;
-  display: inline-block;
+  display: block;
 }
 .banner p {
   color: #B8B8B8;
@@ -271,4 +288,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     100% {
         transform: translateY(-20px);
     }
+}
+.txt-rotate > .wrap {
+  border-right: 0.08em solid #666;
 }
