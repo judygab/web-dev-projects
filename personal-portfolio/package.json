@@ -11,6 +11,8 @@
     "react-bootstrap": "^2.4.0",
     "react-bootstrap-icons": "^1.8.2",
     "react-dom": "^18.1.0",
+    "react-multi-carousel": "^2.8.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
