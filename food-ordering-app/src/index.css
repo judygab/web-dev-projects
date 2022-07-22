@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'ClashDisplay-Regular';
+    src: url('./assets/fonts/ClashDisplay-Regular.woff2').format('woff2');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'ClashDisplay-Medium';
+    src: url('./assets/fonts/ClashDisplay-Medium.woff2').format('woff2');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'ClashDisplay-Bold';
+    src: url('./assets/fonts/ClashDisplay-Bold.woff2').format('woff2');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+}
+
+.line-clamp-4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  max-height: 109px;
+  line-height: 1.26;
+}
