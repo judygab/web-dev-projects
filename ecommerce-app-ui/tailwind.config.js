@@ -5,7 +5,13 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        graphikMedium: ["Graphik Medium", "sans-serif"],
+        graphikLight: ["Graphik Light", "sans-serif"],
+        graphikBold: ["Graphik Bold", "sans-serif"],
+      }
+    },
   },
   plugins: [],
 }
