@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 export const Button = ({ children, onClick, variant="primary" }) => {
 
-    const defaultStyle = "h-10 px-5 m-2 rounded-lg";
+    const defaultStyle = "h-10 px-5 rounded-lg";
 
     const btnStyle = {
         primary: "text-white bg-slate-800 hover:bg-slate-900",
