@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-export const Button = ({ children, onClick, variant="primary" }) => {
+export const Button = ({ children, onClick, variant="primary", className }) => {
 
     const defaultStyle = "h-10 px-5 rounded-lg";
 
@@ -10,6 +10,6 @@ export const Button = ({ children, onClick, variant="primary" }) => {
     }
 
     return (
-        <button className={clsx(defaultStyle, btnStyle[variant])} onClick={onClick}>{children}</button>
+        <button className={clsx(defaultStyle, btnStyle[variant], className && className)} onClick={onClick}>{children}</button>
     )
 }
