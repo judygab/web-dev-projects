@@ -1,4 +1,6 @@
 import FiltersIcon from "../../assets/icons/filters.svg";
+import { Accordion } from "../elements/Accordion";
+import { CheckBox } from "../elements/CheckBox";
 
 export const FiltersBar = () => {
     return (
@@ -9,6 +11,11 @@ export const FiltersBar = () => {
                     <span className="px-2">Filters</span>
                 </div>
                 <button className="mx-2">Clear All</button>
+            </div>
+            <div className="flex pb-2 justify-between border-b border-slate-300">
+                <Accordion label="Categories">
+                    <p></p>
+                </Accordion>
             </div>
         </div>
     )
