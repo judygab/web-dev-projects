@@ -46,4 +46,15 @@ const COLORS = [
     },
 ]
 
-export { CATEGORIES, COLORS }
+const GENDERS = [
+    {
+        name: "Male",
+        value: "M"
+    },
+    {
+        name: "Female",
+        value: "F"
+    }
+]
+
+export { CATEGORIES, COLORS, GENDERS }
