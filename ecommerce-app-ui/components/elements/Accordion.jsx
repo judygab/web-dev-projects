@@ -8,18 +8,18 @@ export const Accordion = ({ label, children}) => {
     const toggleAccordion = () => setIsOpen(prevIsOpen => !prevIsOpen);
 
     return (
-        <div>
-            <div className="flex justify-between my-2">
-                <p>{label}</p>
+        <>
+            <div className="flex flex-1 justify-between my-2">
+                <div><p>{label}</p></div>
                 <button className="px-3" onClick={toggleAccordion}>
                     {
-                        isOpen ? <UpArrowIcon height="10" width="10" /> : <DownArrowIcon height="10" width="10" />
+                        isOpen ? <UpArrowIcon hßeight="10" width="10" /> : <DownArrowIcon height="10" width="10" />
                     }
                 </button>
             </div>
             {
                 isOpen && <div className="accordion-content">{children}</div>
             }
-        </div>
+        </>
     )
 }
