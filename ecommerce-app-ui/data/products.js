@@ -3,145 +3,169 @@ const PRODUCTS = [
         title: "Beige Jogger",
         category: "Pants",
         imgUrl: "beige_jogger(men).jpg",
-        gender: "M"
+        gender: "M",
+        price: "30",
     },
     {
         title: "Beige Sweater",
         category: "Sweaters",
         imgUrl: "beige_sweater(men).jpg",
-        gender: "M"
+        gender: "M",
+        price: "78",
     },
     {
         title: "Black Blouse",
         category: "Blouses",
         imgUrl: "black_blouse.jpg",
-        gender: "F"
+        gender: "F",
+        price: "80",
     },
     {
         title: "Black Coat",
         category: "Coats",
         imgUrl: "black_coat.jpg",
-        gender: "F"
+        gender: "F",
+        price: "200",
     },
     {
         title: "Black Coat Long",
         category: "Coats",
         imgUrl: "black_coat(1).jpg",
-        gender: "F"
+        gender: "F",
+        price: "250",
     },
     {
         title: "Black Dress",
         category: "Dresses",
         imgUrl: "black_dress.jpg",
-        gender: "M"
+        gender: "M",
+        price: "100",
     },
     {
         title: "Brown Coat",
         category: "Coats",
         imgUrl: "brown_coat.jpg",
-        gender: "F"
+        gender: "F",
+        price: "170",
     },
     {
         title: "Checkered Pants",
         category: "Pants",
         imgUrl: "checkered_pants.jpg",
-        gender: "F"
+        gender: "F",
+        price: "43",
     },
     {
         title: "Green Bag",
         category: "",
         imgUrl: "green_bag.jpg",
-        gender: "F"
+        gender: "F",
+        price: "333",
     },
     {
         title: "Green Blouse",
         category: "Blouses",
         imgUrl: "green_blouse.jpg",
-        gender: "F"
+        gender: "F",
+        price: "85",
     },
     {
         title: "Green Dress",
         category: "Dresses",
         imgUrl: "green_dress.jpg",
-        gender: "F"
+        gender: "F",
+        price: "369",
     },
     {
         title: "Green Shirt",
         category: "Shirts",
         imgUrl: "green_shirt(men).jpg",
-        gender: "F"
+        gender: "F",
+        price: "94",
     },
     {
         title: "Grey Shirt",
         category: "Shirts",
         imgUrl: "grey_shirt(men).jpg",
-        gender: "M"
+        gender: "M",
+        price: "400",
     },
     {
         title: "Navy Jogger Pants",
         category: "Pants",
         imgUrl: "navy_jogger_patn(men).jpg",
-        gender: "M"
+        gender: "M",
+        price: "47",
     },
     {
         title: "Pink Blouse",
         category: "Blouses",
         imgUrl: "pink_blouse.jpg",
-        gender: "F"
+        gender: "F",
+        price: "63",
     },
     {
         title: "Pink Coat",
         category: "Coats",
         imgUrl: "pink_coat.jpg",
-        gender: "M"
+        gender: "M",
+        price: "230",
     },
     {
         title: "Pink Pyjamas",
         category: "",
         imgUrl: "pink_pyjamas.jpg",
-        gender: "F"
+        gender: "F",
+        price: "84",
     },
     {
         title: "Pink shirt",
         category: "Shirts",
         imgUrl: "pink_shirt(men).jpg",
-        gender: "M"
+        gender: "M",
+        price: "50",
     },
     {
         title: "Plaid Skirt",
         category: "Skirts",
         imgUrl: "plaid_skirt.jpg",
-        gender: "F"
+        gender: "F",
+        price: "21",
     },
     {
         title: "Red Coat",
         category: "Coats",
         imgUrl: "red_coat.jpg",
-        gender: "F"
+        gender: "F",
+        price: "128",
     },
     {
         title: "White Blouse",
         category: "Blouses",
         imgUrl: "white_blouse.jpg",
-        gender: "F"
+        gender: "F",
+        price: "59",
     },
     {
         title: "White Blouse Long",
         category: "Blouses",
         imgUrl: "white_blouse(1).jpg",
-        gender: "F"
+        gender: "F",
+        price: "67",
     },
     {
         title: "White Pants",
         category: "Pants",
         imgUrl: "white_pants.jpg",
-        gender: "F"
+        gender: "F",
+        price: "23",
     },
     {
         title: "White Shirt",
         category: "Shirts",
         imgUrl: "white_shirt(men).jpg",
-        gender: "M"
+        gender: "M",
+        price: "10",
     },
 ]
 

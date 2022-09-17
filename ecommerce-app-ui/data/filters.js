@@ -57,4 +57,9 @@ const GENDERS = [
     }
 ]
 
-export { CATEGORIES, COLORS, GENDERS }
+const PRICE_RANGE = [
+    0,
+    1000
+]
+
+export { CATEGORIES, COLORS, GENDERS, PRICE_RANGE }
