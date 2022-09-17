@@ -144,3 +144,5 @@ const PRODUCTS = [
         gender: "M"
     },
 ]
+
+export { PRODUCTS }

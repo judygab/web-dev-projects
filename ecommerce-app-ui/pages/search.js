@@ -12,7 +12,7 @@ const SearchPage = () => {
                 <div className="grid col-span-1">
                     <FiltersBar />
                 </div>
-                <div className="grid m-4 col-span-3">
+                <div className="m-4 col-span-3">
                     <ResultsSummary count={1200} />
                     <ResultsContainer />
                 </div>
