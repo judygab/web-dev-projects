@@ -10,11 +10,27 @@ import "rc-slider/assets/index.css";
 
 export const FiltersBar = () => {
     const [selectedFilters, setSelectedFilters] = useState({});
+    const [initialLoad, setInitialLoad] = useState(true);
 
     const router = useRouter()
+    const { categories, colors, gender, price } = router.query;
 
     useEffect(() => {
-        updateQueryParams()
+       if((categories || colors || gender || price) && initialLoad) {
+            setSelectedFilters({
+                categories,
+                colors,
+                gender,
+                price
+            })
+            setInitialLoad(false);
+       }
+    }, [categories, colors, gender, price])
+
+    useEffect(() => {
+        if (!initialLoad) {
+            updateQueryParams()
+        }
     }, [selectedFilters])
 
     const handleCheckboxChange = (category, value, name) => {
@@ -38,13 +54,11 @@ export const FiltersBar = () => {
             updatedList.push(item);
         } else {
             updatedList = updatedList.filter(el => el != item);
-            console.log(updatedList.filter(el => el != item));
         }
         return updatedList;
     }
 
     const updateQueryParams = () => {
-        console.log('update query params gets called')
         router.push({
             pathname: '/search',
             query: { 
