@@ -9,26 +9,23 @@ import Slider, { createSliderWithTooltip } from "rc-slider";
 import "rc-slider/assets/index.css";
 
 export const FiltersBar = () => {
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedColors, setSelectedColors] = useState([]);
-    const [selectedPrice, setSelectedPrice] = useState(PRICE_RANGE);
-    const [selectedGender, setSelectedGender] = useState([]);
+    const [selectedFilters, setSelectedFilters] = useState({});
 
     const router = useRouter()
 
     useEffect(() => {
         updateQueryParams()
-    }, [selectedCategories, selectedColors, selectedGender, selectedPrice])
+    }, [selectedFilters])
 
     const handleCheckboxChange = (category, value, name) => {
         switch(category) {
             case "categories": 
-                let categories = updateFilter(selectedCategories, name, value);
-                setSelectedCategories(categories);
+                let categories = updateFilter(selectedFilters.categories, name, value);
+                setSelectedFilters({ ...selectedFilters, categories })
                 break;
             case "colors":
-                let colors = updateFilter(selectedColors, name, value);
-                setSelectedColors(colors);
+                let colors = updateFilter(selectedFilters.colors, name, value);
+                setSelectedFilters({ ...selectedFilters, colors})
                 break;
             default:
                 break;
@@ -36,34 +33,40 @@ export const FiltersBar = () => {
     }
 
     const updateFilter = (list, item, value) => {
-        let updatedList = list;
+        let updatedList = list || [];
         if (value == true) {
             updatedList.push(item);
         } else {
             updatedList = updatedList.filter(el => el != item);
+            console.log(updatedList.filter(el => el != item));
         }
         return updatedList;
     }
 
     const updateQueryParams = () => {
+        console.log('update query params gets called')
         router.push({
             pathname: '/search',
             query: { 
-                categories : JSON.stringify(selectedCategories),
-                colors: JSON.stringify(selectedColors),
-                gender: JSON.stringify(selectedGender),
-                price: JSON.stringify(selectedPrice)
+                categories : JSON.stringify(selectedFilters.categories),
+                colors: JSON.stringify(selectedFilters.colors),
+                gender: JSON.stringify(selectedFilters.gender),
+                price: JSON.stringify(selectedFilters.price)
             },
             shallow: true
         });
     }
 
     const handleRadioSelect = (value) => {
-        setSelectedGender(value);
+        setSelectedFilters({ ...selectedFilters, gender: value})
     }
 
     const onSliderChange = (value) => {
-        setSelectedPrice(value)
+        setSelectedFilters({ ...selectedFilters, price: value})
+    }
+
+    const clearFilters = () => {
+        setSelectedFilters({});
     }
 
     return (
@@ -73,7 +76,7 @@ export const FiltersBar = () => {
                     <FiltersIcon />
                     <span className="px-2">Filters</span>
                 </div>
-                <button className="mx-2">Clear All</button>
+                <button className="mx-2" onClick={clearFilters}>Clear All</button>
             </div>
             <div className="flex pb-2 flex-col justify-between border-b border-slate-300">
                 <Accordion label="Categories">
@@ -104,7 +107,7 @@ export const FiltersBar = () => {
                         range
                         min={PRICE_RANGE[0]}
                         max={PRICE_RANGE[1]}
-                        value={selectedPrice}
+                        value={selectedFilters.price}
                         onChange={onSliderChange}
                         handleStyle={{
                             borderColor: "grey"

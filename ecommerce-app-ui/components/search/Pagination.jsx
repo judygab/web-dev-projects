@@ -34,7 +34,6 @@ export const Pagination = ({ pagesTotal, isExpanded, currentPage, onClickPage })
                 {currentPage > 2 && <span className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">...</span>}
                 {
                     [...Array(currentPage - 1, currentPage, currentPage + 1)].filter(i => ![...Array(0,1,pagesTotal)].includes(i)).map((page, index) => {
-                        console.log(page);
                         return (
                             <Btn  key={page} pageIndex={page} currentPage={currentPage} onClick={onClickPage} />
                         )
