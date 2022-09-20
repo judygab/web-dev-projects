@@ -10,38 +10,31 @@ import "rc-slider/assets/index.css";
 
 export const FiltersBar = () => {
     const [selectedFilters, setSelectedFilters] = useState({});
-    const [initialLoad, setInitialLoad] = useState(true);
 
     const router = useRouter()
     const { categories, colors, gender, price } = router.query;
 
     useEffect(() => {
-       if((categories || colors || gender || price) && initialLoad) {
-            setSelectedFilters({
-                categories,
-                colors,
-                gender,
-                price
+            setSelectedFilters({ 
+                categories: JSON.parse(categories || '[]'),
+                colors: JSON.parse(colors || '[]'),
+                gender: JSON.parse(gender || '[]'),
+                price: JSON.parse(price || '[]')
             })
-            setInitialLoad(false);
-       }
     }, [categories, colors, gender, price])
 
-    useEffect(() => {
-        if (!initialLoad) {
-            updateQueryParams()
-        }
-    }, [selectedFilters])
-
     const handleCheckboxChange = (category, value, name) => {
+        let updatedFilters;
         switch(category) {
             case "categories": 
                 let categories = updateFilter(selectedFilters.categories, name, value);
-                setSelectedFilters({ ...selectedFilters, categories })
+                updatedFilters = { ...selectedFilters, categories };
+                updateQueryParams(updatedFilters);
                 break;
             case "colors":
                 let colors = updateFilter(selectedFilters.colors, name, value);
-                setSelectedFilters({ ...selectedFilters, colors})
+                updatedFilters = { ...selectedFilters, colors};
+                updateQueryParams(updatedFilters)
                 break;
             default:
                 break;
@@ -58,29 +51,29 @@ export const FiltersBar = () => {
         return updatedList;
     }
 
-    const updateQueryParams = () => {
+    const updateQueryParams = (updatedFilters) => {
         router.push({
             pathname: '/search',
             query: { 
-                categories : JSON.stringify(selectedFilters.categories),
-                colors: JSON.stringify(selectedFilters.colors),
-                gender: JSON.stringify(selectedFilters.gender),
-                price: JSON.stringify(selectedFilters.price)
+                categories : JSON.stringify(updatedFilters.categories),
+                colors: JSON.stringify(updatedFilters.colors),
+                gender: JSON.stringify(updatedFilters.gender),
+                price: JSON.stringify(updatedFilters.price)
             },
             shallow: true
         });
     }
 
     const handleRadioSelect = (value) => {
-        setSelectedFilters({ ...selectedFilters, gender: value})
+        updateQueryParams({ ...selectedFilters, gender: value})
     }
 
     const onSliderChange = (value) => {
-        setSelectedFilters({ ...selectedFilters, price: value})
+        updateQueryParams({...selectedFilters, price: value})
     }
 
     const clearFilters = () => {
-        setSelectedFilters({});
+        updateQueryParams({});
     }
 
     return (
@@ -97,7 +90,7 @@ export const FiltersBar = () => {
                     {
                         CATEGORIES.map((category, index) => {
                             return (
-                                <CheckBox key={index} label={category.name} onChange={(e) => handleCheckboxChange("categories", e.target.checked, category.name)} />
+                                <CheckBox key={index} label={category.name} onChange={(e) => handleCheckboxChange("categories", e.target.checked, category.name)}/>
                             )
                         })
                     }
