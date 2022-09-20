@@ -3,8 +3,11 @@ import User from "../../assets/icons/user.svg";
 import Cart from "../../assets/icons/cart.svg";
 import { NavButton } from "./NavButton";
 import { NavLink } from "./NavLink";
+import { useCart } from '../../context/cart-context';
 
 export const Header = () => {
+    const {state} = useCart();
+
     return (
         <div className="flex flex-col items-center justify-center mt-32">
             <div className="flex flex-col">
@@ -28,7 +31,15 @@ export const Header = () => {
                         </a>
                         <NavButton url="/search"><Search /></NavButton>
                         <NavButton url="/user"><User /></NavButton>
-                        <NavButton url="/cart"><Cart /></NavButton>
+                        <NavButton url="/cart">
+                            <div className="relative">
+                                <Cart />
+                                { state.products.length > 0 && 
+                                    <div className="rounded-full bg-black text-white text-sm flex justify-center items-center absolute -top-3 -right-2 w-4 h-4">
+                                        {state.products.length}
+                                    </div>}
+                            </div>
+                        </NavButton>
                     </div>
                 </nav>
             </div>

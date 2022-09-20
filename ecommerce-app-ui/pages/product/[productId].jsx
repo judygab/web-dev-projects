@@ -4,6 +4,7 @@ import { PRODUCTS } from '../../data/products';
 import Spinner from '../../components/elements/Spinner';
 import Image from "next/image";
 import NumberCounter from '../../components/product/NumberCounter';
+import { useCart } from '../../context/cart-context';
 
 const imageLoader = ({ src }) => {
     return `/images/products/${src}`
@@ -16,6 +17,8 @@ const ProductPage = () => {
     const [notFound, setNotFound] = useState(false);
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
+
+    const { dispatch } = useCart();
 
     useEffect(() => {
         if (productId) {
@@ -62,7 +65,7 @@ const ProductPage = () => {
                         </div>
                         <div className='product-controls flex flex-row items-end'>
                             <NumberCounter quantity={quantity} updateQuantity={updateQuantity} />
-                            <button className='bg-black text-white p-3 w-full mx-3'>Add To Cart</button>
+                            <button onClick={() => dispatch({ type: 'add', product: { ...product, qt: quantity }})} className='bg-black text-white p-3 w-full mx-3'>Add To Cart</button>
                         </div>
                     </div>
                 </>
