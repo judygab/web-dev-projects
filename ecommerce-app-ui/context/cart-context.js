@@ -17,7 +17,7 @@ function cartReducer(state, action) {
                 let index = state.products.findIndex((product) => product.id === action.id);
                 let product = state.products[index];
                 let updatedProduct = { ...product, qt: action.quantity};
-                return { products: [...state.products.slice(index, 1), updatedProduct]};
+                return { products: [...state.products.slice(0, index), ...state.products.slice(index + 1), updatedProduct]};
             }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
