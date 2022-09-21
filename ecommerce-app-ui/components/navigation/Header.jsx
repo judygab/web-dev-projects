@@ -16,7 +16,6 @@ export const Header = () => {
 
     useEffect(() => {
         if (gender !== undefined && !categories && !colors && !price) {
-            console.log("es")
             setMenuItemActive(gender);
         } else {
             setMenuItemActive("");

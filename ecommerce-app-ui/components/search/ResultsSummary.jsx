@@ -13,7 +13,7 @@ export const ResultsSummary = ({ count, currPage, resultsPerPage, onPageUpdate }
     const { categories, color } = router.query;
     const totalPages = Math.ceil(count / resultsPerPage);
     const [isExpanded, setIsExpanded] = useState(false);
-    const [isOpen, setIsOpen] = useState(true)  
+    const [isOpen, setIsOpen] = useState(false)  
 
     useEffect(() => {
         if (totalPages < 8) {
