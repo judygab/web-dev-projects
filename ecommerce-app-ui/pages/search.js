@@ -17,10 +17,10 @@ const SearchPage = () => {
             <h1 className="text-xl p-4 text-center font-graphikLight">Search</h1>
             <SearchBar />
             <div className="grid grid-cols-4 h-screen">
-                <div className="grid col-span-1">
+                <div className="grid hidden sm:block col-span-1">
                     <FiltersBar />
                 </div>
-                <div className="m-4 col-span-3">
+                <div className="m-4 col-span-4 sm:col-span-3">
                     <ResultsSummary count={120} currPage={currPage} resultsPerPage={resultsPerPage} onPageUpdate={onPageUpdate} />
                     <ResultsContainer currPage={currPage} resultsPerPage={resultsPerPage} />
                 </div>

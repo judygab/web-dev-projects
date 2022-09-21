@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.2",
     "clsx": "^1.2.1",
     "next": "12.2.3",
     "rc-slider": "^10.0.1",
