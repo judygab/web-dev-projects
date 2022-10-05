@@ -11,5 +11,5 @@ export const ProjectCard = ({ title, description, imgUrl }) => {
         </div>
       </div>
     </Col>
-  )
-}
+  );
+};
