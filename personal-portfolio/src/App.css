@@ -118,8 +118,8 @@ span.navbar-text {
     margin-left: 14px;
 }
 .social-icon a {
-    width: 42px;
-    height: 42px;
+    width: 45px;
+    height: 45px;
     background: rgba(217, 217, 217, 0.1);
     display: inline-flex;
     border-radius: 50%;
@@ -131,8 +131,8 @@ span.navbar-text {
 }
 .social-icon a::before {
     content: "";
-    width: 42px;
-    height: 42px;
+    width: 45px;
+    height: 45px;
     position: absolute;
     background-color: #ffffff;
     border-radius: 50%;
@@ -143,13 +143,13 @@ span.navbar-text {
     transform: scale(1);
 }
 .social-icon a img {
-	width: 40%;
+	width: 80%;
 	z-index: 1;
 	transition: 0.3s ease-in-out;
 }
-.social-icon a:hover img {
+/*.social-icon a:hover img {
 	filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
-}
+}*/
 .navbar-text button {
   font-weight: 700;
   color: #fff;
@@ -231,13 +231,17 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 /************ Banner Css ************/
-.banner {
-  margin-top: 0;
-  padding: 260px 0 100px 0;
-  background-image: url('./assets/img/banner-bg.png');
+.gg {
+  padding: 10px 0 100px 0;
+}
+.banner { 
+  background: rgba(0, 0, 0, 0.57) url('./assets/img/bg2.jpg');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
+  margin-top: 0;
+  padding: 243px 0 100px 0;
+  background-blend-mode: darken;
 }
 .banner .tagline {
   font-weight: 700;
@@ -258,8 +262,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   display: block;
 }
 .banner p {
-  color: #B8B8B8;
-  font-size: 18px;
+  color: #d8d8d8;
+  font-size: 18.5px;
   letter-spacing: 0.8px;
   line-height: 1.5em;
   width: 96%;
