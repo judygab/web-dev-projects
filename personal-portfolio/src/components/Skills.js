@@ -48,11 +48,11 @@ export const Skills = () => {
                                 <h5>JavaScript</h5>
                             </div>
                             <div className="item">
-                                <img src={meter4} alt="Image" />
+                                <img src={meter3} alt="Image" />
                                 <h5>Hardhat - Truffle Suite</h5>
                             </div>
                             <div className="item">
-                                <img src={meter3} alt="Image" />
+                                <img src={meter4} alt="Image" />
                                 <h5>Ethers.js - Web3.js</h5>
                             </div>
                             <div className="item">
