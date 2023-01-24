@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from '../assets/img/logo2.png';
-import navIcon1 from '../assets/img/lk1.png';
-import navIcon2 from '../assets/img/git.png';
-import navIcon3 from '../assets/img/ig3.png';
-import navIcon4 from '../assets/img/tw1.png';
+import logo from '../assets/img/logoD.svg';
+import navIcon1 from '../assets/img/linkedin1.svg';
+import navIcon2 from '../assets/img/git3.svg';
+import navIcon3 from '../assets/img/ig4.svg';
+import navIcon4 from '../assets/img/t2.svg';
 import { HashLink } from 'react-router-hash-link';
 import {
   BrowserRouter as Router
@@ -56,9 +56,9 @@ export const NavBar = () => {
                 <a href="https://www.instagram.com/diegovilla_0/"><img src={navIcon3} alt="Instagram" /></a>
                 <a href="https://twitter.com/diegovilla_0"><img src={navIcon4} alt="Github" /></a>
               </div>
-              <HashLink to='#connect'>
+              <a href='https://www.linkedin.com/in/diego-villanueva-045933158/'>
                 <button className="vvd"><span>Let’s Connect</span></button>
-              </HashLink>
+              </a>
             </span>
           </Navbar.Collapse>
         </Container>

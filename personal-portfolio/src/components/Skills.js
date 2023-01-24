@@ -37,7 +37,7 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Skills</h2>
-                        <p>Mi stack de tecnologías y habilidades<br></br></p>
+                        <p>I'm a proficient Blockchain Developer with a range of skills that make me well-equipped to tackle any project in this space. My expertise includes:<br></br></p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
                                 <img src={meter5} alt="Image" />

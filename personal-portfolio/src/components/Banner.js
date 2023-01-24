@@ -55,10 +55,9 @@ export const Banner = () => {
             <TrackVisibility>
               {
               <div className="animate__animated animate__fadeIn">
-                <span className="tagline">Bienvenido a mi portafolio</span>
+                <span className="tagline">Welcome to my Web3 portfolio</span>
                 <h1>{`Hi! I'm DiegoVilla👨‍💻`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Blockchain Dev", "DeFi Especialist", "Web3 Enthusiastic" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Tengo años de experiencia en la industria de criptoactivos, estoy enfocado en desarrollo e innovación con tecnologías Blockchain. Llevo a cabo la implementación y codificación de Smart Contracts, como tambien distintos modelos y esquemas de tokenización.
-                  </p>
+                  <p>I have years of experience in this field, with a focus on blockchain development and the implementation of smart contracts. I also have expertise in creating tokenization models. I invite you to browse through my portfolio and learn more about my work in the Web3 space. Thank you for visiting!</p>
               </div>}
             </TrackVisibility>
           </Col>

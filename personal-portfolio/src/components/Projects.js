@@ -52,7 +52,9 @@ export const Projects = () => {
               {
               <div className= "animate__animated animate__fadeIn">
                 <h2>Background</h2>
-                <p>Estoy trabajando día tras día para poder construir mi carrera profesional, tengo un recorrido bastante amplio sobre el mundo de ciptoactivos, mi ética de trabajo es impecable y me gusta trabajar en equipo! 🎯</p>
+                <p>
+                I am actively working to build my professional career, with a broad understanding of the cryptocurrency industry. I have an impeccable work ethic, and I thrive in a collaborative team environment. I am dedicated to continuously learning and expanding my knowledge in the field, and I am committed to delivering high-quality work on every project.
+                </p>
                 <Tab.Container id="projects-tabs" defaultActiveKey="first">
                   <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                     <Nav.Item>
