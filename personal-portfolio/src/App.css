@@ -339,6 +339,19 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   width: 40%;
   z-index: -4;
 }
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.pie-text {
+  color: #fff;
+}
+.pie-container {
+margin-left: 10px;
+
+}
 
 /************ Projects Css ************/
 .project {
