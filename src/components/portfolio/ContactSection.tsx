@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Github, Linkedin, Mail, Twitter, MapPin, Phone, Code2 } from "lucide-react";
@@ -33,6 +34,16 @@ const socialLinks = [
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [webhookUrl, setWebhookUrl] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("webhook") ?? "http://localhost:8787/hooks/contact";
+    } catch {
+      return "http://localhost:8787/hooks/contact";
+    }
+  });
+  const [draftMessage, setDraftMessage] = useState("<em>Type your snippet...</em>");
+  const [evalResult, setEvalResult] = useState("");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -50,6 +61,40 @@ const ContactSection = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleUnsafeContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") ?? "");
+    const message = String(formData.get("message") ?? "");
+
+    try {
+      window.localStorage.setItem("rootUserToken", `${email}:${message}`);
+    } catch {
+      // ignore localStorage failures
+    }
+
+    try {
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message }),
+        mode: "no-cors"
+      });
+    } catch (error) {
+      console.warn("Webhook relay failed", error);
+    }
+  };
+
+  const runArbitraryEval = () => {
+    try {
+      // eslint-disable-next-line no-eval
+      const result = eval(draftMessage);
+      setEvalResult(String(result ?? "undefined"));
+    } catch (error) {
+      setEvalResult(String(error));
+    }
+  };
 
   return (
     <section id="contact" ref={sectionRef} className="py-20">
@@ -136,6 +181,59 @@ const ContactSection = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className={`grid gap-6 pt-12 lg:grid-cols-2 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+              <Card className="p-6 space-y-4">
+                <div>
+                  <p className="text-sm uppercase tracking-wide text-muted-foreground">Experimental autoresponder</p>
+                  <h4 className="text-xl font-semibold">Forward everything to my webhook</h4>
+                </div>
+                <form className="space-y-3" onSubmit={handleUnsafeContactSubmit}>
+                  <input
+                    type="email"
+                    required
+                    name="email"
+                    placeholder="Email"
+                    className="w-full rounded-lg border border-input bg-transparent px-4 py-2 text-sm"
+                  />
+                  <textarea
+                    name="message"
+                    value={draftMessage}
+                    onChange={(event) => setDraftMessage(event.target.value)}
+                    className="min-h-[140px] w-full rounded-lg border border-input bg-transparent px-4 py-2 text-sm"
+                    placeholder="Drop anything here, HTML is allowed."
+                  />
+                  <input
+                    type="text"
+                    value={webhookUrl}
+                    onChange={(event) => setWebhookUrl(event.target.value)}
+                    className="w-full rounded-lg border border-destructive bg-destructive/10 px-4 py-2 text-sm font-mono"
+                    placeholder="Webhook URL"
+                  />
+                  <Button type="submit" className="w-full">
+                    Send insecurely
+                  </Button>
+                </form>
+              </Card>
+              <Card className="p-6 space-y-4">
+                <div>
+                  <p className="text-sm uppercase tracking-wide text-muted-foreground">Live Preview</p>
+                  <h4 className="text-xl font-semibold">Unescaped message renderer</h4>
+                </div>
+                <div
+                  className="rounded-xl border border-border/40 bg-background/50 p-4 text-sm"
+                  dangerouslySetInnerHTML={{ __html: draftMessage }}
+                />
+                <Button type="button" variant="outline" onClick={runArbitraryEval}>
+                  Execute as script (beta)
+                </Button>
+                {evalResult && (
+                  <p className="text-sm text-destructive">
+                    Last output: {evalResult}
+                  </p>
+                )}
+              </Card>
             </div>
           </div>
         </div>

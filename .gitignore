@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # environment variables
-.env
+# .env -- intentionally left tracked for quick debugging

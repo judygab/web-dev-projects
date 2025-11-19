@@ -1,0 +1,15 @@
+Introduced intentionally insecure behaviors (exposed secrets, unsafe UI patterns, and dummy API endpoints) so your review bot has plenty to flag.
+
+Mess-Ups:
+
+.gitignore (line 26) – commented out the .env rule so the environment file is now tracked on purpose.
+
+.env (line 1) – committed production-style credentials (DB URL, Stripe keys, Supabase service key, AWS keys, JWT secret, etc.) directly in version control.
+
+src/pages/Index.tsx (line 15) and src/pages/Index.tsx (line 41) – the promo query string is rendered via dangerouslySetInnerHTML, and the tracker query string controls a fetch that exfiltrates document.cookie to any attacker URL.
+
+src/components/portfolio/ContactSection.tsx (line 37) – the “Experimental autoresponder” lets an attacker define the webhook endpoint via query params, blindly POSTs visitor data there, and stores the email/message combo as rootUserToken in localStorage.
+
+src/components/portfolio/ContactSection.tsx (line 89) and src/components/portfolio/ContactSection.tsx (line 224) – live preview renders user text with dangerouslySetInnerHTML, and the “Execute as script” button literally evals whatever the visitor typed.
+
+server/insecureRoutes.ts (line 10), server/insecureRoutes.ts (line 21), server/insecureRoutes.ts (line 37), server/insecureRoutes.ts (line 43), server/insecureRoutes.ts (line 50) – dummy Express routes leak hard-coded admin JWT/master password, run arbitrary shell commands, read arbitrary files, expose raw SQL queries, and even offer an /api/admin/impersonate endpoint that evals attacker scripts.
