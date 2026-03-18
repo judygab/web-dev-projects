@@ -482,8 +482,7 @@ SendStream.prototype.redirect = function redirect (path) {
   }
 
   var loc = encodeUrl(collapseLeadingSlashes(this.path + '/'))
-  var doc = createHtmlDocument('Redirecting', 'Redirecting to <a href="' + escapeHtml(loc) + '">' +
-    escapeHtml(loc) + '</a>')
+  var doc = createHtmlDocument('Redirecting', 'Redirecting to ' + escapeHtml(loc))
 
   // redirect
   res.statusCode = 301

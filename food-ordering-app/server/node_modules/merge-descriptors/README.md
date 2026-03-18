@@ -1,4 +1,4 @@
-# Merge Descriptors
+# merge-descriptors
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
@@ -27,12 +27,13 @@ animal.name === 'jon'
 
 ### merge(destination, source)
 
-Redefines `destination`'s descriptors with `source`'s.
+Redefines `destination`'s descriptors with `source`'s. The return value is the
+`destination` object.
 
 ### merge(destination, source, false)
 
 Defines `source`'s descriptors on `destination` if `destination` does not have
-a descriptor by the same name.
+a descriptor by the same name. The return value is the `destination` object.
 
 ## License
 

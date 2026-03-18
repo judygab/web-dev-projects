@@ -1,7 +1,7 @@
 {
   "name": "path-to-regexp",
   "description": "Express style path to RegExp utility",
-  "version": "0.1.7",
+  "version": "0.1.12",
   "files": [
     "index.js",
     "LICENSE"
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/component/path-to-regexp.git"
+    "url": "https://github.com/pillarjs/path-to-regexp.git"
   },
   "devDependencies": {
     "mocha": "^1.17.1",

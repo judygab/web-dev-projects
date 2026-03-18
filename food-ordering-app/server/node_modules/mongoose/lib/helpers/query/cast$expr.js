@@ -77,8 +77,8 @@ module.exports = function cast$expr(val, schema, strictQuery) {
 };
 
 function _castExpression(val, schema, strictQuery) {
-  if (isPath(val)) {
-    // Assume path
+  // Preserve the value if it represents a path or if it's null
+  if (isPath(val) || val === null) {
     return val;
   }
 
@@ -275,7 +275,7 @@ function isLiteral(val) {
   }
   if (typeof val === 'object' && val !== null && Object.keys(val).find(key => key[0] === '$')) {
     // The `$literal` expression can make an object a literal
-    // https://docs.mongodb.com/manual/reference/operator/aggregation/literal/#mongodb-expression-exp.-literal
+    // https://www.mongodb.com/docs/manual/reference/operator/aggregation/literal/#mongodb-expression-exp.-literal
     return val.$literal != null;
   }
   return true;

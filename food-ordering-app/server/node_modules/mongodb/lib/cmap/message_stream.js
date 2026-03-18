@@ -83,22 +83,18 @@ function canCompress(command) {
 }
 function processIncomingData(stream, callback) {
     const buffer = stream[kBuffer];
-    if (buffer.length < 4) {
-        callback();
-        return;
+    const sizeOfMessage = buffer.getInt32();
+    if (sizeOfMessage == null) {
+        return callback();
     }
-    const sizeOfMessage = buffer.peek(4).readInt32LE();
     if (sizeOfMessage < 0) {
-        callback(new error_1.MongoParseError(`Invalid message size: ${sizeOfMessage}`));
-        return;
+        return callback(new error_1.MongoParseError(`Invalid message size: ${sizeOfMessage}`));
     }
     if (sizeOfMessage > stream.maxBsonMessageSize) {
-        callback(new error_1.MongoParseError(`Invalid message size: ${sizeOfMessage}, max allowed: ${stream.maxBsonMessageSize}`));
-        return;
+        return callback(new error_1.MongoParseError(`Invalid message size: ${sizeOfMessage}, max allowed: ${stream.maxBsonMessageSize}`));
     }
     if (sizeOfMessage > buffer.length) {
-        callback();
-        return;
+        return callback();
     }
     const message = buffer.read(sizeOfMessage);
     const messageHeader = {
@@ -110,34 +106,27 @@ function processIncomingData(stream, callback) {
     const monitorHasAnotherHello = () => {
         if (stream.isMonitoringConnection) {
             // Can we read the next message size?
-            if (buffer.length >= 4) {
-                const sizeOfMessage = buffer.peek(4).readInt32LE();
-                if (sizeOfMessage <= buffer.length) {
-                    return true;
-                }
+            const sizeOfMessage = buffer.getInt32();
+            if (sizeOfMessage != null && sizeOfMessage <= buffer.length) {
+                return true;
             }
         }
         return false;
     };
     let ResponseType = messageHeader.opCode === constants_1.OP_MSG ? commands_1.BinMsg : commands_1.Response;
     if (messageHeader.opCode !== constants_1.OP_COMPRESSED) {
-        const messageBody = message.slice(MESSAGE_HEADER_SIZE);
+        const messageBody = message.subarray(MESSAGE_HEADER_SIZE);
         // If we are a monitoring connection message stream and
         // there is more in the buffer that can be read, skip processing since we
         // want the last hello command response that is in the buffer.
         if (monitorHasAnotherHello()) {
-            processIncomingData(stream, callback);
+            return processIncomingData(stream, callback);
         }
-        else {
-            stream.emit('message', new ResponseType(message, messageHeader, messageBody));
-            if (buffer.length >= 4) {
-                processIncomingData(stream, callback);
-            }
-            else {
-                callback();
-            }
+        stream.emit('message', new ResponseType(message, messageHeader, messageBody));
+        if (buffer.length >= 4) {
+            return processIncomingData(stream, callback);
         }
-        return;
+        return callback();
     }
     messageHeader.fromCompressed = true;
     messageHeader.opCode = message.readInt32LE(MESSAGE_HEADER_SIZE);
@@ -146,30 +135,24 @@ function processIncomingData(stream, callback) {
     const compressedBuffer = message.slice(MESSAGE_HEADER_SIZE + 9);
     // recalculate based on wrapped opcode
     ResponseType = messageHeader.opCode === constants_1.OP_MSG ? commands_1.BinMsg : commands_1.Response;
-    (0, compression_1.decompress)(compressorID, compressedBuffer, (err, messageBody) => {
+    return (0, compression_1.decompress)(compressorID, compressedBuffer, (err, messageBody) => {
         if (err || !messageBody) {
-            callback(err);
-            return;
+            return callback(err);
         }
         if (messageBody.length !== messageHeader.length) {
-            callback(new error_1.MongoDecompressionError('Message body and message header must be the same length'));
-            return;
+            return callback(new error_1.MongoDecompressionError('Message body and message header must be the same length'));
         }
         // If we are a monitoring connection message stream and
         // there is more in the buffer that can be read, skip processing since we
         // want the last hello command response that is in the buffer.
         if (monitorHasAnotherHello()) {
-            processIncomingData(stream, callback);
+            return processIncomingData(stream, callback);
         }
-        else {
-            stream.emit('message', new ResponseType(message, messageHeader, messageBody));
-            if (buffer.length >= 4) {
-                processIncomingData(stream, callback);
-            }
-            else {
-                callback();
-            }
+        stream.emit('message', new ResponseType(message, messageHeader, messageBody));
+        if (buffer.length >= 4) {
+            return processIncomingData(stream, callback);
         }
+        return callback();
     });
 }
 //# sourceMappingURL=message_stream.js.map

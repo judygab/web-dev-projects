@@ -1,6 +1,12 @@
 import * as defaultOperations from "./operations";
 import {
   Query,
+  QueryOperators,
+  BasicValueQuery,
+  ArrayValueQuery,
+  ValueQuery,
+  NestedQuery,
+  ShapeQuery,
   Options,
   createQueryTester,
   EqualsOperation,
@@ -30,6 +36,12 @@ const createDefaultQueryTester = <TItem, TSchema extends TItem = TItem>(
 
 export {
   Query,
+  QueryOperators,
+  BasicValueQuery,
+  ArrayValueQuery,
+  ValueQuery,
+  NestedQuery,
+  ShapeQuery,
   EqualsOperation,
   createQueryTester,
   createOperationTester,
