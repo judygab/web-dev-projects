@@ -160,8 +160,7 @@ class AggregationCursor extends abstract_cursor_1.AbstractCursor {
         this[kPipeline].push({ $unwind });
         return this;
     }
-    // deprecated methods
-    /** @deprecated Add a geoNear stage to the aggregation pipeline */
+    /** Add a geoNear stage to the aggregation pipeline */
     geoNear($geoNear) {
         (0, abstract_cursor_1.assertUninitialized)(this);
         this[kPipeline].push({ $geoNear });

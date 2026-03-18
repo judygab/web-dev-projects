@@ -2,6 +2,7 @@ import type { Document } from './bson';
 import { MongoRuntimeError, MongoTransactionError } from './error';
 import type { CommandOperationOptions } from './operations/command';
 import { ReadConcern, ReadConcernLike } from './read_concern';
+import type { ReadPreferenceLike } from './read_preference';
 import { ReadPreference } from './read_preference';
 import type { Server } from './sdam/server';
 import { WriteConcern } from './write_concern';
@@ -17,7 +18,7 @@ export const TxnState = Object.freeze({
 } as const);
 
 /** @internal */
-export type TxnState = typeof TxnState[keyof typeof TxnState];
+export type TxnState = (typeof TxnState)[keyof typeof TxnState];
 
 const stateMachine: { [state in TxnState]: TxnState[] } = {
   [TxnState.NO_TRANSACTION]: [TxnState.NO_TRANSACTION, TxnState.STARTING_TRANSACTION],
@@ -67,7 +68,7 @@ export interface TransactionOptions extends CommandOperationOptions {
   /** A default writeConcern for commands in this transaction */
   writeConcern?: WriteConcern;
   /** A default read preference for commands in this transaction */
-  readPreference?: ReadPreference;
+  readPreference?: ReadPreferenceLike;
   /** Specifies the maximum amount of time to allow a commit action on a transaction to run in milliseconds */
   maxCommitTimeMS?: number;
 }

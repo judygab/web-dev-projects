@@ -6,7 +6,7 @@ const db = require('./db');
 
 const app = express();
 const productRouter = require('./routes/productRouter');
-const userRouter = require('./routes/productRouter');
+const userRouter = require('./routes/userRouter');
 
 const Order = require('./models/orderModel');
 

@@ -42,13 +42,19 @@ export const ProductsPreview = () => {
     }
     
     return (
-        <div className="container mx-auto pb-4 w-2/3 text-white bg-black">
-            <Carousel responsive={responsive}>
+        <div className="container mx-auto pb-12 w-full md:w-3/4 text-white">
+            <div className="flex flex-col items-center justify-center mb-10 space-y-3">
+                <h2 className="text-4xl font-extrabold text-white tracking-wide">
+                    Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-tomato to-marigold">Items</span>
+                </h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-marigold to-tomato rounded-full"></div>
+            </div>
+            <Carousel responsive={responsive} itemClass="px-3" className="z-20">
             {
                 products.length > 0 && products.map((product, index) => {
                     return (
-                        <div className="w-full p-3">
-                            <ProductPreviewCard key={index} product={product} onAddProduct={onAddProduct} />
+                        <div key={index} className="w-full h-full py-6">
+                            <ProductPreviewCard product={product} onAddProduct={onAddProduct} />
                         </div>
                     )
                 })

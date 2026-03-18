@@ -12,15 +12,17 @@ const mpath = require('mpath');
 
 const populateModelSymbol = require('../symbols').populateModelSymbol;
 
-/*!
+/**
  * Given a model and its schema, find all possible schema types for `path`,
  * including searching through discriminators. If `doc` is specified, will
  * use the doc's values for discriminator keys when searching, otherwise
  * will search all discriminators.
  *
+ * @param {Model} model
  * @param {Schema} schema
  * @param {Object} doc POJO
  * @param {string} path
+ * @api private
  */
 
 module.exports = function getSchemaTypes(model, schema, doc, path) {
@@ -171,6 +173,8 @@ module.exports = function getSchemaTypes(model, schema, doc, path) {
             }
           }
         }
+      } else if (foundschema.$isSchemaMap && foundschema.$__schemaType instanceof Mixed) {
+        return foundschema.$__schemaType;
       }
 
       const fullPath = nestedPath.concat([trypath]).join('.');

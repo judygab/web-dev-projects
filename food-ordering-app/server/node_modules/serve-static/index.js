@@ -195,8 +195,7 @@ function createRedirectDirectoryListener () {
 
     // reformat the URL
     var loc = encodeUrl(url.format(originalUrl))
-    var doc = createHtmlDocument('Redirecting', 'Redirecting to <a href="' + escapeHtml(loc) + '">' +
-      escapeHtml(loc) + '</a>')
+    var doc = createHtmlDocument('Redirecting', 'Redirecting to ' + escapeHtml(loc))
 
     // send redirect response
     res.statusCode = 301

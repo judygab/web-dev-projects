@@ -3,6 +3,7 @@
 const SkipPopulateValue = require('./SkipPopulateValue');
 const parentPaths = require('../path/parentPaths');
 const { trusted } = require('../query/trusted');
+const hasDollarKeys = require('../query/hasDollarKeys');
 
 module.exports = function createPopulateQueryFilter(ids, _match, _foreignField, model, skipInvalidIds) {
   const match = _formatMatch(_match);
@@ -13,6 +14,11 @@ module.exports = function createPopulateQueryFilter(ids, _match, _foreignField, 
     if (foreignField !== '_id' || !match['_id']) {
       ids = _filterInvalidIds(ids, foreignSchemaType, skipInvalidIds);
       match[foreignField] = trusted({ $in: ids });
+    } else if (foreignField === '_id' && match['_id']) {
+      const userSpecifiedMatch = hasDollarKeys(match[foreignField]) ?
+        match[foreignField] :
+        { $eq: match[foreignField] };
+      match[foreignField] = { ...trusted({ $in: ids }), ...userSpecifiedMatch };
     }
 
     const _parentPaths = parentPaths(foreignField);
@@ -37,6 +43,11 @@ module.exports = function createPopulateQueryFilter(ids, _match, _foreignField, 
         const foreignSchemaType = model.schema.path(foreignField);
         ids = _filterInvalidIds(ids, foreignSchemaType, skipInvalidIds);
         $or.push({ [foreignField]: { $in: ids } });
+      } else if (foreignField === '_id' && match['_id']) {
+        const userSpecifiedMatch = hasDollarKeys(match[foreignField]) ?
+          match[foreignField] :
+          { $eq: match[foreignField] };
+        match[foreignField] = { ...trusted({ $in: ids }), ...userSpecifiedMatch };
       }
     }
   }
@@ -44,9 +55,13 @@ module.exports = function createPopulateQueryFilter(ids, _match, _foreignField, 
   return match;
 };
 
-/*!
+/**
  * Optionally filter out invalid ids that don't conform to foreign field's schema
  * to avoid cast errors (gh-7706)
+ * @param {Array} ids
+ * @param {SchemaType} foreignSchemaType
+ * @param {Boolean} [skipInvalidIds]
+ * @api private
  */
 
 function _filterInvalidIds(ids, foreignSchemaType, skipInvalidIds) {
@@ -64,9 +79,11 @@ function _filterInvalidIds(ids, foreignSchemaType, skipInvalidIds) {
   });
 }
 
-/*!
+/**
  * Format `mod.match` given that it may be an array that we need to $or if
  * the client has multiple docs with match functions
+ * @param {Array|Any} match
+ * @api private
  */
 
 function _formatMatch(match) {

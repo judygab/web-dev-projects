@@ -143,5 +143,5 @@ function logerror (err) {
 [coveralls-url]: https://coveralls.io/r/pillarjs/finalhandler?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/finalhandler.svg
 [downloads-url]: https://npmjs.org/package/finalhandler
-[github-actions-ci-image]: https://img.shields.io/github/workflow/status/pillarjs/finalhandler/ci/master?label=ci
-[github-actions-ci-url]: https://github.com/jshttp/pillarjs/finalhandler?query=workflow%3Aci
+[github-actions-ci-image]: https://github.com/pillarjs/finalhandler/actions/workflows/ci.yml/badge.svg
+[github-actions-ci-url]: https://github.com/pillarjs/finalhandler/actions/workflows/ci.yml

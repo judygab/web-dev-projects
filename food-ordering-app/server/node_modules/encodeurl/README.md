@@ -1,21 +1,11 @@
-# encodeurl
+# Encode URL
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][travis-image]][travis-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
-
-Encode a URL to a percent-encoded form, excluding already-encoded sequences
+Encode a URL to a percent-encoded form, excluding already-encoded sequences.
 
 ## Installation
 
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/). Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
-
 ```sh
-$ npm install encodeurl
+npm install encodeurl
 ```
 
 ## API
@@ -28,24 +18,13 @@ var encodeUrl = require('encodeurl')
 
 Encode a URL to a percent-encoded form, excluding already-encoded sequences.
 
-This function will take an already-encoded URL and encode all the non-URL
-code points (as UTF-8 byte sequences). This function will not encode the
-"%" character unless it is not part of a valid sequence (`%20` will be
-left as-is, but `%foo` will be encoded as `%25foo`).
+This function accepts a URL and encodes all the non-URL code points (as UTF-8 byte sequences). It will not encode the "%" character unless it is not part of a valid sequence (`%20` will be left as-is, but `%foo` will be encoded as `%25foo`).
 
-This encode is meant to be "safe" and does not throw errors. It will try as
-hard as it can to properly encode the given URL, including replacing any raw,
-unpaired surrogate pairs with the Unicode replacement character prior to
-encoding.
-
-This function is _similar_ to the intrinsic function `encodeURI`, except it
-will not encode the `%` character if that is part of a valid sequence, will
-not encode `[` and `]` (for IPv6 hostnames) and will replace raw, unpaired
-surrogate pairs with the Unicode replacement character (instead of throwing).
+This encode is meant to be "safe" and does not throw errors. It will try as hard as it can to properly encode the given URL, including replacing any raw, unpaired surrogate pairs with the Unicode replacement character prior to encoding.
 
 ## Examples
 
-### Encode a URL containing user-controled data
+### Encode a URL containing user-controlled data
 
 ```js
 var encodeUrl = require('encodeurl')
@@ -97,6 +76,19 @@ http.createServer(function onRequest (req, res) {
 })
 ```
 
+## Similarities
+
+This function is _similar_ to the intrinsic function `encodeURI`. However, it will not encode:
+
+* The `\`, `^`, or `|` characters
+* The `%` character when it's part of a valid sequence
+* `[` and `]` (for IPv6 hostnames)
+* Replaces raw, unpaired surrogate pairs with the Unicode replacement character
+
+As a result, the encoding aligns closely with the behavior in the [WHATWG URL specification][whatwg-url]. However, this package only encodes strings and does not do any URL parsing or formatting.
+
+It is expected that any output from `new URL(url)` will not change when used with this package, as the output has already been encoded. Additionally, if we were to encode before `new URL(url)`, we do not expect the before and after encoded formats to be parsed any differently.
+
 ## Testing
 
 ```sh
@@ -115,14 +107,3 @@ $ npm run lint
 ## License
 
 [MIT](LICENSE)
-
-[npm-image]: https://img.shields.io/npm/v/encodeurl.svg
-[npm-url]: https://npmjs.org/package/encodeurl
-[node-version-image]: https://img.shields.io/node/v/encodeurl.svg
-[node-version-url]: https://nodejs.org/en/download
-[travis-image]: https://img.shields.io/travis/pillarjs/encodeurl.svg
-[travis-url]: https://travis-ci.org/pillarjs/encodeurl
-[coveralls-image]: https://img.shields.io/coveralls/pillarjs/encodeurl.svg
-[coveralls-url]: https://coveralls.io/r/pillarjs/encodeurl?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/encodeurl.svg
-[downloads-url]: https://npmjs.org/package/encodeurl

@@ -822,6 +822,14 @@ res.get = function(field){
  */
 
 res.clearCookie = function clearCookie(name, options) {
+  if (options) {
+    if (options.maxAge) {
+      deprecate('res.clearCookie: Passing "options.maxAge" is deprecated. In v5.0.0 of Express, this option will be ignored, as res.clearCookie will automatically set cookies to expire immediately. Please update your code to omit this option.');
+    }
+    if (options.expires) {
+      deprecate('res.clearCookie: Passing "options.expires" is deprecated. In v5.0.0 of Express, this option will be ignored, as res.clearCookie will automatically set cookies to expire immediately. Please update your code to omit this option.');
+    }
+  }
   var opts = merge({ expires: new Date(1), path: '/' }, options);
 
   return this.cookie(name, '', opts);
@@ -904,14 +912,16 @@ res.cookie = function (name, value, options) {
  */
 
 res.location = function location(url) {
-  var loc = url;
+  var loc;
 
   // "back" is an alias for the referrer
   if (url === 'back') {
+    deprecate('res.location("back"): use res.location(req.get("Referrer") || "/") and refer to https://dub.sh/security-redirect for best practices');
     loc = this.req.get('Referrer') || '/';
+  } else {
+    loc = String(url);
   }
 
-  // set location
   return this.set('Location', encodeUrl(loc));
 };
 
@@ -960,7 +970,7 @@ res.redirect = function redirect(url) {
 
     html: function(){
       var u = escapeHtml(address);
-      body = '<p>' + statuses.message[status] + '. Redirecting to <a href="' + u + '">' + u + '</a></p>'
+      body = '<p>' + statuses.message[status] + '. Redirecting to ' + u + '</p>'
     },
 
     default: function(){
