@@ -27,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 Go back to the project directory, you can run:
 
-### `npm start`
+### `npm start` or  `npm run dev`
 
 ## Environment variables
 
